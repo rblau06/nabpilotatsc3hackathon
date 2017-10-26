@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Simple Broadcaster Application -->
+<!--
+# Copyright 2016 OpenZNet Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+-->
+
+<!--
+   This HTML is an simple example that can be used to demonstrate the
+   Broadcast Application development process.
+
+   Please see "EXAMPLE CHANGE" below, and make the simple change
+   described. Then notice the affect of that change on the broadcast
+   application.
+-->
+ 
+<html>
+  <head>
+
+    <!-- W3C CSS style sheets are used. -->
+    <link href="css/simpleApp.css" type="text/css" rel="stylesheet"/>
+
+    <!-- W3C JavaScript is used. -->
+    <!--
+      The keycodes.js script is REQUIRED and defines the "keycodes"
+      variable.  App developers replace the numeric values in the
+      keycodes.js file to match the keycodes on the keyboard they
+      are using to test with.
+     -->
+    <script src="keycodes.js"></script>
+    <script src="js/simpleApp.js"></script>
+
+  </head>
+
+
+  <body onload="startUpSetUp()">
+    <!-- W3C DOM Elements are used. -->
+    <div>
+
+      <button id="HomeButton" onclick="homeButtonProcessing()">
+        <img id="HomeButtonImage"
+             width=220
+             src="assets/OpenZNet-Logo.png"
+        />
+        <!--
+          EXAMPLE CHANGE:
+
+          1. In the "img" tag above, change the "src" attribute:
+             from
+               "assets/OpenZNet-Logo.png"
+             to
+               "assets/PILOT-Logo.png"
+
+          2. Save this file (CTRL-S).
+
+          3. Use "Create App Package..." button on the Broadcast
+             Application Demonstration screen.
+
+          4. Use the Remote and reselect channel 1.
+        -->
+      </button>
+
+      <h1>Hit "OK" to see location of the image file.</h1>
+      <h1 id="simpleOutput"></h1>
+
+    </div>
+
+  </body>
+
+</html>

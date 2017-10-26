@@ -1,0 +1,102 @@
+Sample Broadcast Application
+
+This package demonstrates a minimal, ATSC 3.0 Broadcast Application.
+The application will operate with a generic ATSC 3.0 receiver, providing
+an interactive user experience when a viewer tunes to the broadcaster's
+service with a channel change.
+
+Fundamental Requirements
+The following are the fundamental requirements for a Broadcast Application.
+
+1. The application is a directory containing a minimum set of files.
+   These are:
+1.1 A README file that holds an introduction and information about the
+    broadcast application.
+1.2 A VERSION file that simply holds the text of the version of the app.
+1.3 A "home.html" file.  This is the "Launch Page" for the application.
+1.4 A "keycodes.js" file which contains a mapping of logical input operation
+    names to actual W3C Key Event numeric codes (see below).
+
+2. The initial background of the home.html page must be transparent so that
+   the broadcast visuals are allowed to show behind the initial broadcaster
+   application display.
+
+3. If the viewer is not engaged with the broadcast app, the page should be
+   transparent with a minimum of graphical elements so as not to disturb
+   the viewing experience.  While engaged in the broadcaster application
+   user experience, graphics may be whatever is appropriate.
+
+4. There must always be a control path back to the original broadcast
+   application visual experience.  Generally, the EXIT logical operation
+   is used for this.
+
+6. Broadcaster Application logic must accommodate that a viewer can always
+   break out of the app's user experience by switching channels to a new
+   service.  A new broadcast application would then replace whatever is
+   currently presented.  Should the viewer return to channel, the
+   "home.html" page will be loaded.
+
+7. Broadcaster Application logic should connect to the universal receiver
+   websocket.  Please see the "home.html" example in this package for how
+   to connect, receive, and send on this websocket.  The Websocket
+   address is 'ws:localhost:3355'
+
+7. For delivery, the Broadcast Application should always be available
+   from a private BitBucket repository.
+
+
+"keycodes.js"
+Broadcast Application are like web interfaces, except that there is no
+mouse or pointer in the user experience.
+All user interaction is performed with keys.
+As a developer test the broadcast application, they can use a standard keyboard,
+yet the ultimate UX is performed with an IR Remote Control device.
+
+The keycodes.js file is REQUIRED and used to map Broadcast Application logical
+operations to keycodes that are on a keyboard, or ultimately, on a remote.
+This allows the developer to test with a keyboard rather than the remote.
+
+When the broadcaster application is installed, the keycodes.js file will
+be replaced with one that references the correct keycodes of the viewers
+remote control.
+
+All keycodes.js files MUST have the following names:
+
+var keycodes = {
+	LEFT:      37,
+    RIGHT:     39,
+    UP:        38,
+    DOWN:      40,
+	SELECT:    13,
+    EXIT:      60,
+    MENU:      61,
+    GUIDE:     62,
+    INFO:      63,
+	RED:       403,
+    GREEN:     404,
+    YELLOW:    405,
+    BLUE:      406,
+    PLAY:      64,
+    PAUSE:     65,
+    REW:       66,
+    FFW:       67,
+    SLOW:      68,
+    FW:        69	
+}
+
+Broadcast Applications shall use these names for keys in the logic
+when performing operations in the code.
+Although the developer MUST maintain the names, the developer may
+(and most likely will) exchange the numeric values with those that
+represent codes from the keyboard that they are using to test the
+application.
+
+Note that only the named operations used to the broadcast
+application need to be modified.  For example, if the broadcast
+application never uses the "PLAY" operation, then there is no need
+to change that value for the PLAY operation for testing the app.
+
+At integration time, the keycodes.js file in the broadcast application
+will be replaced with a file where the numeric values are codes
+from the viewers remote.
+

@@ -1,0 +1,23 @@
+html
+{
+	height: 100%;
+}
+
+/*
+   Always make the background transparent.
+   The broadcast application will over lay the video presentation
+   for the channel.
+*/
+body
+{
+	margin:0px;
+	overflow:hidden;
+	background: transparent;
+	height: 100%;
+	color: Grey;
+}
+
+div
+{
+	margin: 20%;
+}

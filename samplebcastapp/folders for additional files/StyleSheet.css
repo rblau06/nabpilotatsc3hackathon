@@ -1,0 +1,106 @@
+﻿html
+{
+	height: 100%;
+}
+/*
+   Always make the background transparent.
+   The broadcast application will over lay the video presentation
+   for the channel.
+*/
+body
+{
+	margin:60px;
+	background: transparent;    
+	height: calc(100% - 120px); /* 1080 - 60 - 60*/
+	color: black;
+}
+
+button
+{
+	margin:5px;
+	color: Black;
+}
+
+.activeStream {
+    border: 2px solid green;
+    background-color: lightgreen;
+}
+
+#streamStatusList {
+    display:none; 
+    color: red;
+}
+
+.selected 
+{
+    
+    border: 2px solid purple;
+    background-color: rgba(128,0,128,0.4);
+}
+
+.selecting
+{
+    box-shadow: 0 0 40px gray;
+    border: 2px solid gray;
+    background-color: gray;
+}
+
+.SampleApp
+{
+	margin:5px;
+    float: left;
+    background-color: rgba(238, 221, 238, 0.7);
+}
+
+.buttonGroup {
+    border: 2px solid purple;
+    padding: 5px;
+    height: 150px;
+    width: 175px; 
+}
+
+span {
+    color: red;
+}
+
+.tallerButtonGroup {
+    border: 2px solid purple;
+    padding: 5px;
+    min-height: 324px;    
+}
+#VideoControlsDiv {
+    clear: left;
+}
+
+#FromSocket {
+    width: calc(100% - 10px);
+}
+#FromSocket p {
+    margin-top: 0px;
+}
+
+.RequestButton
+{
+	width:140px;
+}
+
+.FromSocket
+{
+	margin-left:19%;
+	width: 60%;
+}
+
+#ReceivedFromSocket
+{
+	border: 2px solid purple;
+    background-color: #e5cae5;
+}
+
+.homeButton
+{
+	background: transparent;
+	width: 120px;
+    position: absolute;
+    bottom: 50px;
+    right: 75px;
+}

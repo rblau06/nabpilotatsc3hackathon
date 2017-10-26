@@ -1,0 +1,98 @@
+body{
+	margin: 0;
+	height: 100%;
+	background: transparent;    
+	height: calc(100% - 120px); /* 1080 - 60 - 60*/
+	color: #fff;
+	font-family: helvetica;
+	/*hides scrollbar. Sometimes appears on transitions*/
+	overflow: hidden;
+}
+
+h1{
+	font-size:6em;
+	margin: .25em;
+}
+
+h2{
+	font-size:5em;
+	margin: .25em;
+}
+
+video{
+	max-width: 100%;
+}
+
+button{
+	z-index: 99999;
+	position: fixed;
+	top:0;
+}
+
+/*option boxes*/
+.option{
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+	height: 100vh;
+	-webkit-box-sizing:border-box;
+}
+
+.option img{
+	width: 70%;
+}
+
+.fruit{
+	background-color: #00a770;
+	border:solid 50px #00a770;
+}
+
+.vegetable{
+	background-color: #fee303;
+	border:solid 50px #fee303;
+}
+/*option boxes end*/
+
+/*banner*/
+.banner-wrapper{
+	position: absolute;
+	bottom: 5em;
+	width: 100%;
+	text-align: center;
+}
+
+.banner-wrapper img{
+	max-width:20%;
+	position: relative;
+	bottom: -0.3em;
+}
+
+.yellow{
+	margin: 0 auto;
+	background-color: #fee303;
+	border: solid 5px #000;
+	border-radius: 25px;
+	max-width: 70%;
+}
+
+.green{
+	background-color: #00a770;
+	border: solid 5px #000;
+	border-radius: 25px;
+	margin: 1em;
+}
+
+.fa{
+	font-size: 1em;
+	color: #fff;
+	display: inline;
+	margin: .5em;
+}
+/*banner end*/
+
+.hide{
+	display: none;
+}
+.selected{
+	border:solid 50px #572a73;
+}

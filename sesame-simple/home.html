@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sesame Street - What Comes Next?</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Sesame Street - What Comes Next?">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/JavaScript.js"></script>
+	<script src="keycodes.js"></script>
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/styles.css"></style>
+</head>
+<body onload="startUpSetUp()">
+	<video autoplay id="broadcast" onended="launchApp()">
+		<source src="assets/videos/sesame-street.mp4" type="video/mp4">
+	</video>
+	<div id="launch" class="hide" onclick="launchApp()">
+		<div class="option fruit" id="B2" onclick="chooseLeft()"">
+			<h1>FRUIT</h1>
+			<img src="assets/images/fruit.png">
+		</div><div class="option vegetable" id="B3" onclick="chooseRight()">
+			<h1>VEGETABLES</h1>
+			<img src="assets/images/vegetable.png">
+		</div>
+		<div class="banner-wrapper">
+			<img src="assets/images/banner.png">
+			<div class="yellow" id="B1">
+				<div class="green">
+					<h2><i class="fa fa-arrow-circle-left"></i>WHAT'S NEXT?<i class="fa fa-arrow-circle-right"></i></h2>
+				</div>
+			</div>
+		</div>
+		<video class="incorrect hide" onended="reload()">
+			<source src="assets/videos/incorrect.mp4" type="video/mp4">
+		</video>
+		<video class="correct hide" onended="reload()">
+			<source src="assets/videos/correct.mp4" type="video/mp4">
+		</video>
+	</div>
+</body>
+</html>

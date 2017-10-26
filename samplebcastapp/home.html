@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- Sample Broadcaster Application -->
+<!--
+# Copyright 2016 OpenZNet Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+-->
+
+<!-- 
+    In the actual application, many files and sub-directories are used,
+    and are encased in a single "root" directory. The root directory
+    constitutes the Broadcaster Application.
+    
+	Please read the comments embedded in the sample below for
+	guidance on coding a broadcaster application.
+ -->
+ 
+<html>
+<head>
+    <!-- Include css style sheets. Always make sure the background starts as transparent. -->
+    <link href="folders for additional files/StyleSheet.css" type="text/css" rel="stylesheet" />
+    <!-- The keycodes.js script is REQUIRED and defines the "keycodes" variable. -->
+    <script src="keycodes.js"></script>
+    <!-- Include any other files as necessary -->
+    <script src="folders for additional files/JavaScript.js"></script>
+
+</head>
+
+<body onload="startUpSetUp()">
+    <div id="Introduction" class="SampleApp">
+        <h2>ATSC 3.0 Application Runtime Environment -- Sample Application</h2>
+        <p>
+            This sample application may be initiated with a Chrome or Firefox browser.
+            The application gives examples of using the ATSC 3.0 Application Runtime Environment.
+            Please see the source of this page to see how the different constructs and messages are used.
+            Use the arrow keys navigate around the buttons, and 'select' or 'enter' to select a button.
+            Concepts explored with this application are:
+            <ul>
+                <li>Connecting to the Gateway WebSocket.</li>
+                <li>Registering for Run Time Environment Events.</li>
+                <li>Issuing directives to the RTE such as switching Service ID.</li>
+            </ul>
+    </div>
+    <div id="FromSocket" class="SampleApp">
+        <p class="FromSocket">Received From Websocket:</p>
+        <p class="FromSocket" id="ReceivedFromSocket">empty</p>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                <div id="StreamRegistrationDiv" class="SampleApp tallerButtonGroup">
+                    <strong>Stream Events</strong>
+                    <p>
+                        You can select Broadcast Stream Events by URI.  Select a<br />
+                        stream that you want to be notified of, then select<br />
+                        "Request".
+                    <p>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="streamChoice activeStream" id="B1" onclick="setStreamChoice(this.id)">-- Ad Event --<br />urn:uuid:9a04f079-9840-4286</button><br />
+                                    <button class="streamChoice" id="B2" onclick="setStreamChoice(this.id)">urn:uuid:9a04f079-9840-9876</button><br />
+                                    <button class="streamChoice" id="B3" onclick="setStreamChoice(this.id)">urn:uuid:9a04f079-9840-1234</button>
+                                </td>
+                                <td>
+                                    <button id="B4" class="RequestButton"
+                                            onclick="sendToSocket(eventStreamRegistrationRequest())">
+                                        Request
+                                    </button><br />
+                                    <button id="B4a" class="RequestButton"
+                                            onclick="sendToSocket(eventUnrequest(streamRequestIds[streamUri]))">
+                                        Unrequest
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <span id="streamStatus"></span>
+                        <ul id="streamStatusList">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                </div>
+            </td>
+            <td>
+                <div id="RatingChangeRegistrationDiv" class="SampleApp buttonGroup">
+                    <strong>Rating Change Events</strong><br />
+                    <button id="B5" class="RequestButton"
+                            onclick="sendToSocket(eventRegistrationRequestRatingChange)">
+                        Request
+                    </button><br />
+                    <button id="B5a" class="RequestButton"
+                            onclick="sendToSocket(eventUnrequest(otherEventRequestIds.RatingChange))">
+                        Unrequest
+                    </button>
+                    <span id="ratingChangeStatus"></span>
+                </div>
+                <div id="ServiceChangeRegistrationDiv" class="SampleApp buttonGroup">
+                    <strong>Service Change Events</strong><br />
+                    <button id="B5A" class="RequestButton"
+                            onclick="sendToSocket(eventRegistrationRequestServiceChange)">
+                        Request
+                    </button><br />
+                    <button id="B5Aa" class="RequestButton"
+                            onclick="sendToSocket(eventUnrequest(otherEventRequestIds.ServiceChange))">
+                        Unrequest
+                    </button>
+                    <span id="serviceChangeStatus"></span>
+                </div>
+                <div id="ToBeTerminatedRegistrationDiv" class="SampleApp  buttonGroup">
+                    <strong>ToBeTerminated Events</strong><br />
+                    <button id="B5B" class="RequestButton"
+                            onclick="sendToSocket(eventRegistrationRequestToBeTerminated)">
+                        Request
+                    </button><br />
+                    <button id="B5Ba" class="RequestButton"
+                            onclick="sendToSocket(eventUnrequest(otherEventRequestIds.ToBeTerminated))">
+                        Unrequest
+                    </button>
+                    <span id="toBeTerminatedStatus"></span>
+                </div>
+                <div id="CaptionChangeRegistrationDiv" class="SampleApp  buttonGroup">
+                    <strong>Caption Change Events</strong><br />
+                    <button id="B5C" class="RequestButton"
+                            onclick="sendToSocket(eventRegistrationRequestCaptionChange)">
+                        Request
+                    </button><br />
+                    <button id="B5Ca" class="RequestButton"
+                            onclick="sendToSocket(eventUnrequest(otherEventRequestIds.CaptionState))">
+                        Unrequest
+                    </button>
+                    <span id="captionChangeStatus"></span>
+                </div>
+                <div id="PersonalizationChangeRegistrationDiv" class="SampleApp  buttonGroup">
+                    <strong>Personalization Events</strong><br />
+                    <button id="B5D" class="RequestButton"
+                            onclick="sendToSocket(eventRegistrationRequestPersonalization)">
+                        Request
+                    </button><br />
+                    <button id="B5Da" class="RequestButton"
+                            onclick="sendToSocket(eventUnrequest(otherEventRequestIds.Personalization))">
+                        Unrequest
+                    </button>
+                    <span id="personalizationStatus"></span>
+                </div>
+                <div id="VideoControlsDiv" class="SampleApp  buttonGroup">
+                    <strong>Directives to Gateway:</strong><br />
+                    <!--
+                    <button id="B6" onclick="sendToSocket(sampleSwitchVideoAction)">Switch to Llama Video +10</button>
+                    <button id="B7" onclick="sendToSocket(sampleChangeSizeAction)">1/4 Corner Video</button>
+                    <button id="B8" onclick="sendToSocket(sampleResetSizeAction)">Reset Video Size</button>
+                    -->
+                    <button id="B8Aa" onclick="sendToSocket(sampleServiceRequest('201'))">Service ID 201</button><br />
+                    <button id="B8Ab" onclick="sendToSocket(sampleServiceRequest('301'))">Service ID 301</button>
+                </div>
+                <div id="DataRequestsDiv" class="SampleApp  buttonGroup">
+                    <strong>Requests From Gateway:</strong><br />
+                    <button id="B8A" onclick="sendToSocket(requestCCStatus)">CC Status</button><br />
+                    <button id="B8B" onclick="sendToSocket(requestPersZipcode)">Pers: Zipcode</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <button name="HomeButton" id="B9" class="homeButton">
+        <img width=100 alt="OpenZNet" src="folders for additional files/OpenZNet logo.png" />             
+    </button>
+</body>
+</html>
