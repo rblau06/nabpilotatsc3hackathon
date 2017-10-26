@@ -28,4 +28,6 @@ var keycodes = {
     KEY7: 103,  //numpad 7
     KEY8: 104,  //numpad 8
     KEY9: 105   //numpad 9
+
+    //This is a change
 }
